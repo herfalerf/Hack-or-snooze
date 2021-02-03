@@ -1,5 +1,7 @@
 "use strict";
 
+$loginForm.show();
+$signupForm.show();
 // global to hold the User instance of the currently-logged-in user
 let currentUser;
 
@@ -110,6 +112,8 @@ function saveUserCredentialsInLocalStorage() {
 function updateUIOnUserLogin() {
   console.debug("updateUIOnUserLogin");
 
+  //The starter file was not hiding the login and create user forms after submitting, added the hidePageComponents() function here to fix the functionality.  Another thing that was not mentioned in the instructions.
+  hidePageComponents();
   $allStoriesList.show();
 
   updateNavOnLogin();
