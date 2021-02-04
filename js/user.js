@@ -1,7 +1,5 @@
 "use strict";
 
-$loginForm.show();
-$signupForm.show();
 // global to hold the User instance of the currently-logged-in user
 let currentUser;
 

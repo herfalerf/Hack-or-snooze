@@ -24,7 +24,7 @@ class Story {
 
   getHostName() {
     // UNIMPLEMENTED: complete this function!
-    return "hostname.com";
+    return new URL(this.url).host;
   }
 }
 
@@ -88,6 +88,20 @@ class StoryList {
 
     return story;
   }
+
+  async removeStory(user, storyId) {
+    const token = user.loginToken;
+    await axios({
+      url: `${BASE_URL}/stories/${storyId}`,
+      method: "DELETE",
+      data: { token: user.longinToken },
+    });
+
+    this.stories = this.stories.filter((story) => story.storyId !== storyId);
+
+    user.ownStories = user.ownStories.filter((s) => s.storyId !== storyId);
+    user.favorites = user.favorites.filter((s) => s.storyId !== storyId);
+  }
 }
 
 /******************************************************************************
@@ -130,6 +144,7 @@ class User {
       data: { user: { username, password, name } },
     });
 
+    //////////////////////////////////
     //This functionality was broken on the original file, but the instructions said it was supposed to be working from the start
     return new User(response.data.user, response.data.token);
   }
@@ -147,18 +162,7 @@ class User {
       data: { user: { username, password } },
     });
 
-    let { user } = response.data;
-
-    return new User(
-      {
-        username: user.username,
-        name: user.name,
-        createdAt: user.createdAt,
-        favorites: user.favorites,
-        ownStories: user.stories,
-      },
-      response.data.token
-    );
+    return new User(response.data.user, response.data.token);
   }
 
   /** When we already have credentials (token & username) for a user,

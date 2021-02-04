@@ -14,6 +14,8 @@ function navAllStories(evt) {
 
 $body.on("click", "#nav-all", navAllStories);
 
+//show submit form for new story when clicking "submit"
+
 function navSubmitClick(evt) {
   console.debug("navSubmitClick", evt);
   hidePageComponents();
@@ -23,6 +25,8 @@ function navSubmitClick(evt) {
 
 $navSubmitStory.on("click", navSubmitClick);
 
+//show user's favorite stories when clicking "favorites"
+
 function navFavoritesClick(evt) {
   console.debug("navFavoritesClick", evt);
   hidePageComponents();
@@ -30,6 +34,8 @@ function navFavoritesClick(evt) {
 }
 
 $body.on("click", "#nav-favorites", navFavoritesClick);
+
+//show user's submitted stories when clicking "my stories"
 
 function navMyStories(evt) {
   console.debug("navMyStories", evt);
@@ -50,14 +56,6 @@ function navLoginClick(evt) {
 }
 
 $navLogin.on("click", navLoginClick);
-
-function navProfileClick(evt) {
-  console.debug("navProfileClick", evt);
-  hidePageComponents();
-  $userProfile.show();
-}
-
-$navUserProfile.on("click", navProfileClick);
 
 /** When a user first logins in, update the navbar to reflect that. */
 
